@@ -1,0 +1,44 @@
+spring:
+  profiles.active: dev
+  application:
+    name: "@project.artifactId@"
+    description: "@project.name@"
+  build:
+    version: "@project.version@"
+  jackson:
+    default-property-inclusion: NON_NULL
+server:
+  port: ${port:8000}
+  rest:
+    base: null
+management:
+  endpoints:
+    jmx:
+      exposure:
+        include: health,info,prometheus
+    web:
+      base-path: /admin
+      exposure:
+        include: health,info,prometheus
+  info:
+    git:
+      mode: full
+info:
+  app:
+    encoding: "@project.build.sourceEncoding@"
+    java:
+      source: "@java.version@"
+      target: "@java.version@"
+
+springdoc:
+  api-docs:
+    enabled: true
+    path: /v3/api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+  servers:
+    - url: http://localhost:8000
+      description: localhost
+logging:
+  level:
+    com.pccw.platform.connector: DEBUG
